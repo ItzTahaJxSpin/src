@@ -1,0 +1,42 @@
+const Command = require('../../Structures/Command');
+const discord = require("discord.js");
+const imdb = require("imdb-api");
+
+module.exports = class extends Command {
+    constructor(...args) {
+		super(...args, {
+			aliases: ["weather"],
+			description: 'Get the weather of anywhere.',
+			category: 'Info',
+			usage: ' + `<country/city>`'
+		});
+    }
+    
+    async run (message, args, color) {
+    
+    if(!args.length) {
+      return message.channel.send(`Please give the name of movie or series\n\n Usage ➜ ` + "**" + this.client.prefix + "`imdb`** **`<movie/series>`**")
+    }
+    
+    const imob = new imdb.Client({apiKey: "5e36f0db"}) //You need to paste you imdb api
+    
+    let movie = await imob.get({'name': args.join(" ")})
+    
+    let embed = new discord.MessageEmbed()
+    .setTitle(movie.title)
+    .setColor("#ff2050")
+    .setThumbnail(movie.poster)
+    .setDescription(movie.plot)
+    .setFooter(`Ratings: ${movie.rating}`)
+    .addField("Country", movie.country, true)
+    .addField("Languages", movie.languages, true)
+    .addField("Type", movie.type, true);
+    
+    
+    message.channel.send(embed)
+    
+    
+    
+  }
+
+}

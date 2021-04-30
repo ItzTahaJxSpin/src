@@ -1,0 +1,43 @@
+const Command = require('../../Structures/Command.js');
+const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
+// const { Random } = require("something-random-on-discord")
+const api = require("imageapi.js");
+// const random = new Random();
+
+module.exports = class extends Command {
+
+	constructor(...args) {
+		super(...args, {
+			aliases: ['memes', "funny", "deepmemes", "bruh"],
+			description: 'Memes 😂.',
+			category: 'Fun',
+			usage: ' '
+		});
+	}
+	
+	async run(message) {
+
+		let subreddits = [
+			"memes",
+			"funny",
+			"deepmemes",
+			"bruh",
+			"meme"
+		  ];
+
+		  let subreddit = subreddits[Math.floor(Math.random()*(subreddits.length))];
+		  let img = await api(subreddit)
+		  const Embed = new Discord.MessageEmbed()
+		  .setTitle(`A meme from redit`)
+		  .setURL(`https://images-platform.99static.com/vuNFdrtMvYbnZjNqQQiT7WhWHd4=/163x0:1032x869/500x500/top/smart/99designs-contests-attachments/107/107808/attachment_107808852`)
+		  .setColor('RANDOM')
+		  .setImage(img)
+		  message.channel.send(Embed)
+
+
+			//	let data = await random.getMeme()
+			//message.channel.send(data)
+	}
+
+};
