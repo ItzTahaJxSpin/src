@@ -1,6 +1,6 @@
 {
     "prefix": "-",
     "token": "TOKEN",
-    "owners": ["463058195578093588"],
+    "owners": ["YOUR_ACC_ID"],
     "defaultPerms": ["SEND_MESSAGES", "VIEW_CHANNEL"]
 }
